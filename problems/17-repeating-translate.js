@@ -29,13 +29,34 @@ console.log(repeatingTranslate("her family flew to France"));   // "herer family
 */
 
 let repeatingTranslate = function(sentence) {
-    // Your code here
+    let words = sentence.split(' ');
+    words = words.map(translateWord);
+    return words.join(' ');
 };
 
 
 let translateWord = function(word) {
-    // Your code here
+
+    if (word.length < 3) {
+        return word;
+    }
+
+    if ('aeiouAEIOU'.includes(word[word.length - 1])) {
+        return word + word;
+    }
+
+    for (let i = word.length - 1; i >= 0; i--) {
+        if ('aeiouAEIOU'.includes(word[i])){
+            return word + word.slice(i);
+        }
+    }
 };
+
+// console.log(repeatingTranslate("we like to go running fast"));  // "we likelike to go runninging fastast"
+// console.log(repeatingTranslate("he cannot find the trash"));    // "he cannotot findind thethe trashash"
+// console.log(repeatingTranslate("pasta is my favorite dish"));   // "pastapasta is my favoritefavorite dishish"
+// console.log(repeatingTranslate("her family flew to France"));   // "herer familyily flewew to FranceFrance"
+
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 
@@ -43,4 +64,4 @@ try {
     module.exports = repeatingTranslate;
 } catch (e) {
     module.exports = null;
-}
+}
